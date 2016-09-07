@@ -12,10 +12,6 @@ var core_1 = require('@angular/core');
 var AppComponent = (function () {
     function AppComponent() {
         this.title = "Heroes of might and magic";
-        this.hero = {
-            id: 1,
-            name: "Sandro"
-        };
         this.heroes = [
             { id: 10, name: "dr. Faust" },
             { id: 11, name: "Crag Hack" },
@@ -25,10 +21,13 @@ var AppComponent = (function () {
             { id: 15, name: "Sandro" }
         ];
     }
+    AppComponent.prototype.onSelect = function (hero) {
+        this.selectedHero = hero;
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n    <h2 class=\"display-center margin-bottom-20\">{{title}}</h2>\n    <p>Hero name: <b>{{hero.name}}</b></p>\n    <p>Hero id: <b>{{hero.id}}</b></p>\n    <div class=\"margin-bottom-50\">\n        <h3><label class=\"label label-primary\">Change hero name:\n            <input type=\"text\" class=\"form-control col-xs-12 col-sm-6 col-md-4\" [(ngModel)]=\"hero.name\" placeholder=\"Enter a name for hero\" />\n        </label></h3>\n    </div>\n    <h2>All heroes:</h2>\n    <ul class=\"heroes\">\n        <li *ngFor=\"let hero of heroes\">\n             <span class=\"badge\">{{hero.id}}</span> {{hero.name}}\n        </li>\n    </ul>\n    "
+            template: "\n    <h2 class=\"display-center margin-bottom-20\">{{title}}</h2>\n    <div *ngIf=\"selectedHero\">\n    <p>Hero name: <b>{{selectedHero.name}}</b></p>\n    <p>Hero id: <b>{{selectedHero.id}}</b></p>\n    <div class=\"margin-bottom-50\">\n        <h3><label class=\"label label-primary\">Change hero name:\n            <input type=\"text\" class=\"form-control col-xs-12 col-sm-6 col-md-4\" [(ngModel)]=\"selectedHero.name\" placeholder=\"Enter a name for hero\" />\n        </label></h3>\n    </div>\n    </div>\n    <h2>All heroes:</h2>\n    <ul class=\"heroes\">\n        <li *ngFor=\"let hero of heroes\" [class.selected]=\"hero === selectedHero\" (click)=\"onSelect(hero)\">\n             <span class=\"badge\">{{hero.id}}</span> {{hero.name}}\n        </li>\n    </ul>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

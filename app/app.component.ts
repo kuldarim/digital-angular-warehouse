@@ -11,16 +11,18 @@ export interface IHeroInterface
     selector: 'my-app',
     template: `
     <h2 class="display-center margin-bottom-20">{{title}}</h2>
-    <p>Hero name: <b>{{hero.name}}</b></p>
-    <p>Hero id: <b>{{hero.id}}</b></p>
+    <div *ngIf="selectedHero">
+    <p>Hero name: <b>{{selectedHero.name}}</b></p>
+    <p>Hero id: <b>{{selectedHero.id}}</b></p>
     <div class="margin-bottom-50">
         <h3><label class="label label-primary">Change hero name:
-            <input type="text" class="form-control col-xs-12 col-sm-6 col-md-4" [(ngModel)]="hero.name" placeholder="Enter a name for hero" />
+            <input type="text" class="form-control col-xs-12 col-sm-6 col-md-4" [(ngModel)]="selectedHero.name" placeholder="Enter a name for hero" />
         </label></h3>
+    </div>
     </div>
     <h2>All heroes:</h2>
     <ul class="heroes">
-        <li *ngFor="let hero of heroes">
+        <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
              <span class="badge">{{hero.id}}</span> {{hero.name}}
         </li>
     </ul>
@@ -30,11 +32,7 @@ export interface IHeroInterface
 export class AppComponent 
 {
     public title:string = "Heroes of might and magic";
-    public hero:IHeroInterface = 
-    {
-        id: 1,
-        name: "Sandro"
-    }
+    public selectedHero:IHeroInterface;
 
     public heroes:IHeroInterface[] = 
     [
@@ -45,4 +43,10 @@ export class AppComponent
         {id: 14, name: "Ky kyske"},
         {id: 15, name: "Sandro"}
     ];
+
+    public onSelect(hero: IHeroInterface):void
+    {
+        this.selectedHero = hero;
+    }
+
 }
