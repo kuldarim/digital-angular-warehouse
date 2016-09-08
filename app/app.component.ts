@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {IHeroInterface} from './hero';
+import {HeroService} from './hero.service';
+import {OnInit} from '@angular/core';
 
 
 @Component
@@ -14,28 +16,34 @@ import {IHeroInterface} from './hero';
              <span class="badge">{{hero.id}}</span> {{hero.name}}
         </li>
     </ul>
-    `
+    `,
+    providers: [HeroService]
 })
 
-export class AppComponent 
+export class AppComponent implements OnInit
 {
     public title:string = "Heroes of might and magic";
     public selectedHero:IHeroInterface;
-
-    public heroes:IHeroInterface[] = 
-    [
-        {id: 10, name: "dr. Faust"},
-        {id: 11, name: "Crag Hack"},
-        {id: 12, name: "Victoria"},
-        {id: 13, name: "Gerg"},
-        {id: 14, name: "Ky kyske"},
-        {id: 15, name: "Sandro"}
-    ];
+    public heroes:IHeroInterface[];
 
     public onSelect(hero: IHeroInterface):void
     {
         this.selectedHero = hero;
-        console.log("click");
+    }
+
+    constructor(private heroService: HeroService) // heroService injection
+    {
+        this.getHeroes();
+    }
+
+    ngOnInit():void
+    {
+        this.getHeroes();
+    }
+
+    private getHeroes():void
+    {
+        this.heroService.getHeroes().then(heroes => this.heroes = heroes); // Im getiing mock heroes data from heroService by using Promises
     }
 
 }
