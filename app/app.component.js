@@ -24,7 +24,7 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.getHeroes = function () {
         var _this = this;
-        this.heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes; }); // Im getiing mock heroes data from heroService by using Promises
+        this.heroService.getHeroesSlowly().then(function (heroes) { return _this.heroes = heroes; }); // Im getiing mock heroes data from heroService by using Promises
     };
     AppComponent = __decorate([
         core_1.Component({

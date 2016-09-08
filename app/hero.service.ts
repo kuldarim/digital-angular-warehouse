@@ -9,4 +9,9 @@ export class HeroService
     {
         return Promise.resolve(heroes);
     }
+
+    getHeroesSlowly(): Promise<IHeroInterface[]>
+    {
+        return new Promise<IHeroInterface>(resolve => setTimeout(resolve, 1000)).then(() => this.getHeroes());
+    }
 }

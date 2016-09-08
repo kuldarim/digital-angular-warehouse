@@ -43,7 +43,7 @@ export class AppComponent implements OnInit
 
     private getHeroes():void
     {
-        this.heroService.getHeroes().then(heroes => this.heroes = heroes); // Im getiing mock heroes data from heroService by using Promises
+        this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes); // Im getiing mock heroes data from heroService by using Promises
     }
 
 }
