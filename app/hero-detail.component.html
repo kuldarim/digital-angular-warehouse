@@ -1,0 +1,11 @@
+<div *ngIf="hero">
+    <p>Hero name: <b>{{hero.name}}</b></p>
+    <p>Hero id: <b>{{hero.id}}</b></p>
+    <div class="row">
+        <div class="margin-bottom-50 col-xs-12 col-sm-6 col-md-4">
+            <h3>Change hero name:</h3>
+                <input type="text" class="form-control col-xs-12 col-sm-6 col-md-4" [(ngModel)]="hero.name" placeholder="Enter a name for hero" />
+                <button class="btn btn-primary" (click)="goBack()">Back</button>
+        </div>
+    </div>
+</div>

@@ -1,27 +1,40 @@
-import {Component, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params} from '@angular/router';
+
 import {IHeroInterface} from './hero';
+import {HeroService} from './hero.service';
 
 @Component
 ({
     selector: 'hero-detail',
-    template:
-    `
-    <div *ngIf="hero">
-        <p>Hero name: <b>{{hero.name}}</b></p>
-        <p>Hero id: <b>{{hero.id}}</b></p>
-        <div class="margin-bottom-50">
-            <h3><label class="label label-primary">Change hero name:
-                <input type="text" class="form-control col-xs-12 col-sm-6 col-md-4" [(ngModel)]="hero.name" placeholder="Enter a name for hero" />
-            </label></h3>
-        </div>
-    </div>
-    `
+    templateUrl: 'app/hero-detail.component.html',
+    styleUrls: ['app/hero-detail.component.css']
 })
 
 
 
-export class HeroDetailComponent
+export class HeroDetailComponent implements OnInit
 {
-    @Input()
     public hero:IHeroInterface;
+
+    constructor
+    (
+        private heroService: HeroService,
+        private route: ActivatedRoute
+    ){}
+
+    ngOnInit():void
+    {
+        this.route.params.forEach((params: Params) =>
+        {
+            let id = +params['id']; // get id and convert it to string with +
+            this.heroService.getHero(id).then(hero => this.hero = hero);
+        });
+    }
+
+    goBack():void
+    {
+        window.history.back();
+    }
+
 }

@@ -16,9 +16,12 @@ var HeroService = (function () {
     HeroService.prototype.getHeroes = function () {
         return Promise.resolve(mock_heroes_1.heroes);
     };
+    HeroService.prototype.getHero = function (id) {
+        return this.getHeroes().then(function (heroes) { return heroes.find(function (hero) { return hero.id === id; }); });
+    };
     HeroService.prototype.getHeroesSlowly = function () {
         var _this = this;
-        return new Promise(function (resolve) { return setTimeout(resolve, 1000); }).then(function () { return _this.getHeroes(); });
+        return new Promise(function (resolve) { return setTimeout(resolve, 1000); }).then(function () { return _this.getHeroes(); }); // simulates 1 s delay in getting data
     };
     HeroService = __decorate([
         core_1.Injectable(), 
