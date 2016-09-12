@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Add user:</h1>
+        <form #f="ngForm" (ngSubmit)="save(f.value, f.valid)" novalidate>
+
+            <!-- template driven form, all form validation is in a component -->
+            <!-- form container -->
+            <div class="col-xs-12 col-sm-6 clearfix">
+
+                <!-- Name -->
+                <h2>Name:</h2><input class="form-control" type="text" name="name" [(ngModel)]="user.name" #name="ngModel" required minlength="5"/>
+                <p class="text-danger" [hidden]="name.valid || (name.pristine && !f.submitted)">Name is required (min. 5 characters).</p>
+
+                <!-- end name -->
+
+                <!-- Adress -->
+                <div ngModelGroup="address">
+                    <div>
+                        <h2>Street</h2><input class="form-control" type="text" name="street" [(ngModel)]="user.address.street" #street="ngModel" required>
+                        <p class="text-danger" [hidden]="street.valid || (street.pristine && !f.submitted)">Required field.</p>
+                    </div>
+
+                    <div>
+                        <h2>House number</h2><input class="form-control" type="text" name="number" [(ngModel)]="user.address.number" #number="ngModel" required>
+                        <p class="text-danger" [hidden]="number.valid || (number.pristine && !f.submitted)">Required field.</p>
+                    </div>
+
+                     <div>
+                        <h2>Post code</h2><input class="form-control" type="text" name="post" [(ngModel)]="user.address.post" #post="ngModel" required>
+                        <p class="text-danger" [hidden]="post.valid || (post.pristine && !f.submitted)">Required field.</p>
+                    </div>
+
+                </div>
+                <!-- end address -->
+
+                <!-- Password -->
+                <div>
+                    <h2>Password:</h2><input class="form-control" type="password" name="password" [(ngModel)]="user.password" #password="ngModel" required minlength="5">
+                    <p class="text-danger" [hidden]="password.valid || (password.pristine && !f.submitted)">Password needed (min. 5 characters).</p>
+                </div>
+                <div>
+                    <h2>Re-type password:</h2><input class="form-control" type="password" name="password2" [(ngModel)]="user.password2" #password2="ngModel" required minlength="5">
+                    <p class="text-danger" [hidden]="password2.valid || (password2.pristine && !f.submitted)">Required field.</p>
+                    <p class="text-danger" [hidden]="!f.submitted || (user.password == user.password2)">Passwords must match!</p>
+                </div>
+                <!-- end password -->
+
+                <button class="btn btn-success margin-top-20" type="submit">Submit</button>
+
+            </div>
+
+        </form>
+    </div>
+</div>

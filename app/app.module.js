@@ -21,6 +21,7 @@ var heroes_component_1 = require('./heroes.component');
 var hero_service_1 = require('./hero.service');
 var dashboard_component_1 = require('./dashboard.component');
 var hero_search_component_1 = require('./hero-search.component');
+var form_template_component_1 = require('./form-template.component');
 var app_routing_1 = require('./app.routing');
 require('./rxjs-extensions');
 var AppModule = (function () {
@@ -29,7 +30,7 @@ var AppModule = (function () {
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, angular2_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService), app_routing_1.routing],
-            declarations: [app_component_1.AppComponent, hero_detail_component_1.HeroDetailComponent, heroes_component_1.HeroesComponent, dashboard_component_1.DashboardComponent, hero_search_component_1.HeroSearchComponent],
+            declarations: [app_component_1.AppComponent, hero_detail_component_1.HeroDetailComponent, heroes_component_1.HeroesComponent, dashboard_component_1.DashboardComponent, hero_search_component_1.HeroSearchComponent, form_template_component_1.FormTemplateComponent],
             providers: [hero_service_1.HeroService],
             bootstrap: [app_component_1.AppComponent]
         }), 

@@ -13,6 +13,7 @@ import {HeroesComponent} from './heroes.component';
 import {HeroService} from './hero.service';
 import {DashboardComponent} from './dashboard.component';
 import {HeroSearchComponent} from './hero-search.component';
+import {FormTemplateComponent} from './form-template.component';
 
 import {routing} from './app.routing';
 
@@ -22,7 +23,7 @@ import './rxjs-extensions';
 @NgModule
 ({
     imports: [BrowserModule, FormsModule, HttpModule, InMemoryWebApiModule.forRoot(InMemoryDataService), routing],
-    declarations: [AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, HeroSearchComponent],
+    declarations: [AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, HeroSearchComponent, FormTemplateComponent],
     providers: [HeroService],
     bootstrap: [AppComponent]
 })
