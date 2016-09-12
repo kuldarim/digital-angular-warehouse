@@ -30,7 +30,15 @@ var HeroesComponent = (function () {
     };
     HeroesComponent.prototype.getHeroes = function () {
         var _this = this;
-        this.heroService.getHeroesSlowly().then(function (heroes) { return _this.heroes = heroes; }); // Im getiing mock heroes data from heroService by using Promises
+        this.heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes; }); // Im getiing mock heroes data from heroService by using Promises
+    };
+    HeroesComponent.prototype.add = function (name) {
+        var _this = this;
+        name = name.trim();
+        if (!name) {
+            return;
+        }
+        this.heroService.create(name).then(function (hero) { _this.heroes.push(hero); _this.selectedHero = null; });
     };
     HeroesComponent = __decorate([
         core_1.Component({

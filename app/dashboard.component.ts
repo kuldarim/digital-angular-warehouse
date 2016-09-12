@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit
         this.heroService.getHeroes().then(heroes => this.heroes = heroes.slice(0, 5)); // take top 5 heroes
     }
 
-    gotoDetail(hero: IHeroInterface):void
+    public gotoDetail(hero: IHeroInterface):void
     {
         let link = ['/detail', hero.id];
         this.router.navigate(link);

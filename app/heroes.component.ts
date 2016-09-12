@@ -41,7 +41,14 @@ export class HeroesComponent implements OnInit
 
     private getHeroes():void
     {
-        this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes); // Im getiing mock heroes data from heroService by using Promises
+        this.heroService.getHeroes().then(heroes => this.heroes = heroes); // Im getiing mock heroes data from heroService by using Promises
+    }
+
+    public add(name: string):void
+    {
+        name = name.trim();
+        if(!name) { return; }
+        this.heroService.create(name).then(hero => {this.heroes.push(hero); this.selectedHero = null});
     }
 
 }
