@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {HeroesComponent} from './heroes.component';
 import {DashboardComponent} from './dashboard.component';
 import {HeroDetailComponent} from './hero-detail.component';
+import {FormModelComponent} from './form-model.component';
 
 const appRoutes: Routes =
 [
@@ -13,6 +14,10 @@ const appRoutes: Routes =
     {
         path: 'dashboard',
         component: DashboardComponent
+    },
+    {
+        path: 'model-based-form',
+        component: FormModelComponent
     },
     {
         path: 'detail/:id',

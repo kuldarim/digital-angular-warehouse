@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
+var forms_2 = require('@angular/forms');
 var http_1 = require('@angular/http');
 // in-memory web api to fake http server
 var angular2_in_memory_web_api_1 = require('angular2-in-memory-web-api');
@@ -21,6 +22,7 @@ var heroes_component_1 = require('./heroes.component');
 var hero_service_1 = require('./hero.service');
 var dashboard_component_1 = require('./dashboard.component');
 var hero_search_component_1 = require('./hero-search.component');
+var form_model_component_1 = require('./form-model.component');
 var app_routing_1 = require('./app.routing');
 require('./rxjs-extensions');
 var AppModule = (function () {
@@ -28,8 +30,8 @@ var AppModule = (function () {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, angular2_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService), app_routing_1.routing],
-            declarations: [app_component_1.AppComponent, hero_detail_component_1.HeroDetailComponent, heroes_component_1.HeroesComponent, dashboard_component_1.DashboardComponent, hero_search_component_1.HeroSearchComponent],
+            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, forms_2.ReactiveFormsModule, http_1.HttpModule, angular2_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService), app_routing_1.routing],
+            declarations: [app_component_1.AppComponent, hero_detail_component_1.HeroDetailComponent, heroes_component_1.HeroesComponent, dashboard_component_1.DashboardComponent, hero_search_component_1.HeroSearchComponent, form_model_component_1.FormModelComponent],
             providers: [hero_service_1.HeroService],
             bootstrap: [app_component_1.AppComponent]
         }), 
