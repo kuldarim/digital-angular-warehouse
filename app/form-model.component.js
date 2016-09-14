@@ -14,64 +14,39 @@ var FormModelComponent = (function () {
     function FormModelComponent(formBuilder) {
         this.formBuilder = formBuilder;
         this.submitted = false;
-        this.formErrors = {
-            "name": "",
-            "address": "",
-            "street": "",
-            "number": "",
-            "post": "",
-            "password": "",
-            "password2": ""
-        };
-        this.validationMessages = {
-            "name": { "required": "This field is required!", "minlength": "Name must contain at least 5 characters!" },
-            "address": {},
-            "street": { "required": "This field is required!" },
-            "number": { "required": "This field must be numeric!" },
-            "post": { "required": "This field is required!" },
-            "password": { "required": "This field is required!" },
-            "password2": { "required": "This field is required!" }
-        };
+        this.formInit = false;
     }
-    FormModelComponent.prototype.validatePassword = function (passwd) {
-    };
-    FormModelComponent.prototype.ngSubmit = function () {
+    FormModelComponent.prototype.onSubmit = function (isValid) {
+        if (isValid)
+            console.log("Form valid");
         this.submitted = true;
     };
     FormModelComponent.prototype.ngOnInit = function () {
         this.buildForm();
     };
     FormModelComponent.prototype.buildForm = function () {
-        var _this = this;
         this.createUserForm = this.formBuilder.group({
             name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
             address: this.formBuilder.group({
                 street: ['', forms_1.Validators.required],
-                number: ['', forms_1.Validators.required],
+                number: ['', [forms_1.Validators.pattern("^[0-9]*$"), forms_1.Validators.required]],
                 post: ['', forms_1.Validators.required]
             }),
             password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
-            password2: ['', this.validatePassword]
+            password2: ['', [this.validatePassword.bind(this)]]
         });
-        this.createUserForm.valueChanges.subscribe(function (data) { return _this.onValueChanged(data); });
-        this.onValueChanged();
+        this.formInit = true;
     };
-    FormModelComponent.prototype.onValueChanged = function (data) {
-        if (data === void 0) { data = null; }
-        if (!this.createUserForm) {
-            return;
-        }
-        var form = this.createUserForm;
-        // console.log(form);
-        for (var field in this.formErrors) {
-            this.formErrors[field] = "";
-            var control = form.get(field);
-            console.log(control);
-            if (control && control.dirty && !control.valid) {
-                var messages = this.validationMessages[field];
-                for (var key in control.errors) {
-                    this.formErrors[field] += messages[key] + " ";
-                }
+    FormModelComponent.prototype.onEvent = function (event) {
+        event.stopPropagation();
+    };
+    FormModelComponent.prototype.validatePassword = function (control) {
+        if (this.formInit) {
+            if (this.createUserForm.controls['password'].value == this.createUserForm.controls['password2'].value) {
+                return null;
+            }
+            else {
+                return "Error, passwords are not the same";
             }
         }
     };

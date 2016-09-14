@@ -7,23 +7,17 @@ import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
     selector: 'model-based-form',
     templateUrl: 'app/form-model.component.html',
 })
-
-
 export class FormModelComponent implements OnInit
 {
 
     public createUserForm: FormGroup;
     public submitted = false;
-
+    public formInit = false;
     constructor(private formBuilder: FormBuilder) {}
 
-    public validatePassword(passwd: FormControl)
+    public onSubmit(isValid: boolean):void
     {
-
-    }
-
-    public ngSubmit():void
-    {
+        if(isValid) console.log("Form valid");
         this.submitted = true;
     }
 
@@ -37,67 +31,38 @@ export class FormModelComponent implements OnInit
         this.createUserForm = this.formBuilder.group
         ({
             name: ['', [Validators.required, Validators.minLength(5)]],
-            address: this.formBuilder.group
-            ({
+            address: this.formBuilder.group({
                 street: ['', Validators.required],
-                number: ['', Validators.required],
+                number: ['', [Validators.pattern("^[0-9]*$"), Validators.required]],
                 post: ['', Validators.required]
             }),
             password: ['', [Validators.required, Validators.minLength(5)]],
-            password2: ['', this.validatePassword]
+            password2: ['', [this.validatePassword.bind(this)]]
         })
 
-        this.createUserForm.valueChanges.subscribe(data => this.onValueChanged(data));
-        this.onValueChanged();
+        this.formInit = true; 
     }
 
-    public formErrors =
+    public onEvent(event):void
     {
-        "name": "",
-        "address": "",
-        "street": "",
-        "number": "",
-        "post": "",
-        "password": "",
-        "password2": ""
+        event.stopPropagation();
     }
 
-    public validationMessages =
+    public validatePassword(control: FormControl)
     {
-        "name": {"required": "This field is required!", "minlength": "Name must contain at least 5 characters!"},
-        "address": {},
-        "street": {"required": "This field is required!"},
-        "number": {"required": "This field must be numeric!"},
-        "post": {"required": "This field is required!"},
-        "password": {"required": "This field is required!"},
-        "password2": {"required": "This field is required!"}
-    }
 
-    public onValueChanged(data: any = null)
-    {
-        if(!this.createUserForm)
+        if(this.formInit)
         {
-            return;
-        }
-
-        const form = this.createUserForm;
-        // console.log(form);
-
-        for(const field in this.formErrors)
-        {
-            this.formErrors[field] = "";
-            const control = form.get(field);
-            console.log(control);
-
-            if(control && control.dirty && !control.valid)
+            if(this.createUserForm.controls['password'].value == this.createUserForm.controls['password2'].value)
             {
-                const messages = this.validationMessages[field];
-                for(const key in control.errors)
-                {
-                    this.formErrors[field] += messages[key] + " ";
-                }
+                return null;
+            }
+            else
+            {
+                return "Error, passwords are not the same";
             }
         }
+
     }
 
 
