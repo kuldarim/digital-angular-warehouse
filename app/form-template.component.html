@@ -30,7 +30,6 @@
                             <h2>Post code</h2><input class="form-control" type="text" name="post" [(ngModel)]="user.address.post" #post="ngModel" required>
                             <p class="text-danger" [hidden]="post.valid || (post.pristine && !f.submitted)">Required field.</p>
                         </div>
-
                     </div>
                     <!-- end address -->
 
