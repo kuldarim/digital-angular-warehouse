@@ -7,6 +7,7 @@ export class FormInterface
         number: string;
         post: string;
     }
+    email: string;
     password: string;
     password2: string; //passwords must match
 }

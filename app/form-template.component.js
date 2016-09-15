@@ -21,9 +21,14 @@ var FormTemplateComponent = (function () {
                     number: '',
                     post: ''
                 },
+                email: '',
                 password: '',
                 password2: '' //passwords must match
             };
+    };
+    FormTemplateComponent.prototype.checkEmail = function (mail) {
+        var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regex.test(mail);
     };
     FormTemplateComponent.prototype.save = function (model, isValid) {
         console.log(model, isValid);

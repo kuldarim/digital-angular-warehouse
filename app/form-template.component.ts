@@ -23,9 +23,16 @@ export class FormTemplateComponent implements OnInit
                 number: '',
                 post: ''
             },
+            email: '',
             password: '',
             password2: '' //passwords must match
         };
+    }
+
+    public checkEmail(mail:string)
+    {
+        var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regex.test(mail);
     }
 
     save(model: FormInterface, isValid: boolean)

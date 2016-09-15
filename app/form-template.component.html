@@ -34,6 +34,14 @@
                     </div>
                     <!-- end address -->
 
+                    <!-- email -->
+                    <div>
+                        <h2>Email:</h2><input class="form-control" type="text" name="email" [(ngModel)]="user.email" #email="ngModel" required>
+                        <p class="text-danger" [hidden]="email.valid || (password.pristine && !f.submitted)">Email is required.</p>
+                        <p class="text-danger" [hidden]="checkEmail(user.email) || (email.pristine && !f.submitted)">Email is not correct.</p>
+                    </div>
+                    <!-- end email -->
+
                     <!-- Password -->
                     <div>
                         <h2>Password:</h2><input class="form-control" type="password" name="password" [(ngModel)]="user.password" #password="ngModel" required minlength="5">
@@ -41,8 +49,7 @@
                     </div>
                     <div>
                         <h2>Re-type password:</h2><input class="form-control" type="password" name="password2" [(ngModel)]="user.password2" #password2="ngModel" required minlength="5">
-                        <p class="text-danger" [hidden]="password2.valid || (password2.pristine && !f.submitted)">Required field.</p>
-                        <p class="text-danger" [hidden]="!f.submitted || (user.password == user.password2)">Passwords must match!</p>
+                        <p class="text-danger" [hidden]="password2.valid || (password2.pristine && !f.submitted)">Password needed (min. 5 characters).</p>
                     </div>
                     <!-- end password -->
 
