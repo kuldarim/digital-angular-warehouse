@@ -14,8 +14,8 @@ var FormModelComponent = (function () {
     function FormModelComponent(formBuilder) {
         this.formBuilder = formBuilder;
         this.submitted = false;
-        this.formInit = false;
-    }
+        this.formInit = false; // this bool will be set to true after the form was initialized
+    } // I'm using form builder for simplifying form initialization
     FormModelComponent.prototype.onSubmit = function (isValid) {
         if (isValid)
             console.log("Form valid");
@@ -25,7 +25,8 @@ var FormModelComponent = (function () {
         this.buildForm();
     };
     FormModelComponent.prototype.buildForm = function () {
-        this.createUserForm = this.formBuilder.group({
+        this.createUserForm = this.formBuilder.group // form initialization
+        ({
             name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
             address: this.formBuilder.group({
                 street: ['', forms_1.Validators.required],
@@ -36,9 +37,6 @@ var FormModelComponent = (function () {
             password2: ['', [this.validatePassword.bind(this)]]
         });
         this.formInit = true;
-    };
-    FormModelComponent.prototype.onEvent = function (event) {
-        event.stopPropagation();
     };
     FormModelComponent.prototype.validatePassword = function (control) {
         if (this.formInit) {

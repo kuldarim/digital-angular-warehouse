@@ -10,10 +10,11 @@ import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 export class FormModelComponent implements OnInit
 {
 
-    public createUserForm: FormGroup;
+    public createUserForm: FormGroup; // all input fields can be accesses through this var
     public submitted = false;
-    public formInit = false;
-    constructor(private formBuilder: FormBuilder) {}
+    public formInit = false; // this bool will be set to true after the form was initialized
+
+    constructor(private formBuilder: FormBuilder) {} // I'm using form builder for simplifying form initialization
 
     public onSubmit(isValid: boolean):void
     {
@@ -28,7 +29,7 @@ export class FormModelComponent implements OnInit
 
     public buildForm():void
     {
-        this.createUserForm = this.formBuilder.group
+        this.createUserForm = this.formBuilder.group // form initialization
         ({
             name: ['', [Validators.required, Validators.minLength(5)]],
             address: this.formBuilder.group({
@@ -43,12 +44,7 @@ export class FormModelComponent implements OnInit
         this.formInit = true; 
     }
 
-    public onEvent(event):void
-    {
-        event.stopPropagation();
-    }
-
-    public validatePassword(control: FormControl)
+    public validatePassword(control: FormControl) // custom validator, to check if passwords match
     {
 
         if(this.formInit)
